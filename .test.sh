@@ -6,6 +6,12 @@ trap 'err' 0
 
 set -e
 ./scripts/make_times.sh
+for f in Letters Numbers Sentences Words; do
+  if [ ! -f data/${f}.1d ]; then
+     exit 99
+  fi
+done
+
 if [ '454af68bab5189371773440787878250' != `openssl md5 -binary data/Letters.1d | xxd -p` ]; then
   exit 1
 fi
